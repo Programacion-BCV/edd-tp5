@@ -3,14 +3,25 @@ package com.ejercicio3;
 import ar.edu.uner.fcad.ed.arbolesabbyavl.ArbolABB;
 import ar.edu.uner.fcad.ed.arbolesabbyavl.NodoABB;
 
-public class ArbolABBExt<T extends Comparable<? super T>> extends ArbolABB<T> implements ArbolABBExtInterfaz<T>{
+public class ArbolABBExt<T extends Comparable<? super T>> extends ArbolABB<T> implements ArbolABBExtInterfaz<T> {
 
     /**
      * Devuelve el valor del nodo con menor valor de clave.
      */
     @Override
     public T min() {
-        return null;
+
+        NodoABB<T> minimo = this.getRaiz();
+
+        if (this.getRaiz().getHijoIzquierdo() == null) {
+            return this.getRaiz().getValor();
+        }
+
+        while (minimo.tieneHijoIzquierdo()) {
+            minimo = minimo.getHijoIzquierdo();
+        }
+
+        return minimo.getValor();
     }
 
     /**
@@ -18,7 +29,17 @@ public class ArbolABBExt<T extends Comparable<? super T>> extends ArbolABB<T> im
      */
     @Override
     public T max() {
-        return null;
+        NodoABB<T> maximo = this.getRaiz();
+
+        if (this.getRaiz().getHijoDerecho() == null) {
+            return this.getRaiz().getValor();
+        }
+
+        while (maximo.tieneHijoDerecho()) {
+            maximo = maximo.getHijoDerecho();
+        }
+
+        return maximo.getValor();
     }
 
     /**
