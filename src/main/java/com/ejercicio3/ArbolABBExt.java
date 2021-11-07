@@ -2,6 +2,7 @@ package com.ejercicio3;
 
 import ar.edu.uner.fcad.ed.arbolesabbyavl.ArbolABB;
 import ar.edu.uner.fcad.ed.arbolesabbyavl.NodoABB;
+import ar.edu.uner.fcad.ed.edlineales.colas.ColaPorEnlaces;
 
 public class ArbolABBExt<T extends Comparable<? super T>> extends ArbolABB<T> implements ArbolABBExtInterfaz<T> {
 
@@ -50,7 +51,42 @@ public class ArbolABBExt<T extends Comparable<? super T>> extends ArbolABB<T> im
      */
     @Override
     public void eliminarRama(NodoABB<T> nodo) {
+        ColaPorEnlaces<NodoABB<T>> cola = new ColaPorEnlaces<>();
+        NodoABB<T> padre = null;
+        NodoABB<T> hijo = this.getRaiz();
 
+        while (hijo.getValor().compareTo(nodo.getValor()) != 0 ||
+               hijo.getCantidadHijos() == 0) {
+
+            padre = hijo;
+            if (hijo.getValor().compareTo(nodo.getValor()) < 0) {
+                hijo = hijo.getHijoIzquierdo();
+            } else if (hijo.getValor().compareTo(nodo.getValor()) < 0) {
+                hijo = hijo.getHijoDerecho();
+            }
+
+        }
+
+        if (hijo.getValor().equals(this.getRaiz().getValor()) {
+            this.raiz = null;
+        }else{
+            if(hijo.getValor().compareTo(padre.getValor()))
+        }
+
+
+
+    /*
+        while (!cola.isEmpty()) {
+            if (nodo.getHijoIzquierdo() != null) {
+                cola.enqueue(nodo.getHijoIzquierdo());
+            }
+            if (nodo.getHijoDerecho() != null) {
+                cola.enqueue(nodo.getHijoDerecho());
+            }
+            this.remove(nodo.getValor());
+            cola.dequeue();
+
+        }*/
     }
 
     /**
