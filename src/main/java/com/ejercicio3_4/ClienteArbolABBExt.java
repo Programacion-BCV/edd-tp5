@@ -1,4 +1,4 @@
-package com.ejercicio3;
+package com.ejercicio3_4;
 
 import ar.edu.uner.fcad.ed.arbolesabbyavl.NodoABB;
 import ar.edu.uner.fcad.ed.edlineales.iteradores.Iterador;
@@ -21,9 +21,15 @@ public class ClienteArbolABBExt {
 
         System.out.println(arbolBin);
 
-        System.out.println(arbolBin.menorAntecesorComun(new NodoABB<>(2),
-                                                        new NodoABB<>(8)));
+        System.out.println("Nodo con menor valor de clave: [" + arbolBin.min()+"]");
+        System.out.println("Nodo con mayor valor de clave: [" + arbolBin.max()+"]");
+        System.out.println("Eliminado de rama a partir de nodo");
+        arbolBin.eliminarRama(new NodoABB<>(21));
+        System.out.println(arbolBin);
 
+        System.out.println("Menor antecesor común entre el nodo 2 y 8: " +
+                           arbolBin.menorAntecesorComun(new NodoABB<>(2),
+                                                        new NodoABB<>(8)));
 
     }
 }

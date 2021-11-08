@@ -1,4 +1,4 @@
-package com.ejercicio3;
+package com.ejercicio3_4;
 
 import ar.edu.uner.fcad.ed.arbolesabbyavl.ArbolABB;
 import ar.edu.uner.fcad.ed.arbolesabbyavl.NodoABB;
@@ -57,7 +57,6 @@ public class ArbolABBExt<T extends Comparable<? super T>> extends ArbolABB<T> im
         while (hijo.getValor().compareTo(nodo.getValor()) != 0) {
 
             padre = hijo;
-            System.out.println(hijo.getValor().compareTo(nodo.getValor()));
             if (hijo.getValor().compareTo(nodo.getValor()) > 0) {
                 hijo = hijo.getHijoIzquierdo();
             } else if (hijo.getValor().compareTo(nodo.getValor()) < 0) {
