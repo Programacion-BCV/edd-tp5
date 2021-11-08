@@ -19,20 +19,10 @@ public class ClienteArbolABBExt {
         arbolBin.add(13);
         arbolBin.add(19);
 
-        Iterador<Integer> iterador=arbolBin.iteradorEnPreOrden();
-        System.out.println(iterador.siguiente());
-        System.out.println(iterador.siguiente());
-        System.out.println(iterador.siguiente());
-        System.out.println(iterador.siguiente());
-        System.out.println(iterador.siguiente());
-        System.out.println(iterador.siguiente());
-        System.out.println(iterador.siguiente());
-        System.out.println(iterador.siguiente());
-        System.out.println(iterador.siguiente());
-        System.out.println(iterador.siguiente());
-        System.out.println(iterador.siguiente());
+        System.out.println(arbolBin);
 
-        //arbolBin.eliminarRama(new NodoABB<Integer>(12));
+        System.out.println(arbolBin.menorAntecesorComun(new NodoABB<>(2),
+                                                        new NodoABB<>(8)));
 
 
     }

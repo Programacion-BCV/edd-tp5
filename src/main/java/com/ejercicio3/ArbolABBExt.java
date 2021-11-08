@@ -2,7 +2,7 @@ package com.ejercicio3;
 
 import ar.edu.uner.fcad.ed.arbolesabbyavl.ArbolABB;
 import ar.edu.uner.fcad.ed.arbolesabbyavl.NodoABB;
-import ar.edu.uner.fcad.ed.edlineales.colas.ColaPorEnlaces;
+import ar.edu.uner.fcad.ed.edlineales.ListaEnlazadaNoOrdenada;
 
 public class ArbolABBExt<T extends Comparable<? super T>> extends ArbolABB<T> implements ArbolABBExtInterfaz<T> {
 
@@ -51,15 +51,14 @@ public class ArbolABBExt<T extends Comparable<? super T>> extends ArbolABB<T> im
      */
     @Override
     public void eliminarRama(NodoABB<T> nodo) {
-        ColaPorEnlaces<NodoABB<T>> cola = new ColaPorEnlaces<>();
         NodoABB<T> padre = null;
         NodoABB<T> hijo = this.getRaiz();
 
-        while (hijo.getValor().compareTo(nodo.getValor()) != 0 ||
-               hijo.getCantidadHijos() == 0) {
+        while (hijo.getValor().compareTo(nodo.getValor()) != 0) {
 
             padre = hijo;
-            if (hijo.getValor().compareTo(nodo.getValor()) < 0) {
+            System.out.println(hijo.getValor().compareTo(nodo.getValor()));
+            if (hijo.getValor().compareTo(nodo.getValor()) > 0) {
                 hijo = hijo.getHijoIzquierdo();
             } else if (hijo.getValor().compareTo(nodo.getValor()) < 0) {
                 hijo = hijo.getHijoDerecho();
@@ -67,26 +66,16 @@ public class ArbolABBExt<T extends Comparable<? super T>> extends ArbolABB<T> im
 
         }
 
-        if (hijo.getValor().equals(this.getRaiz().getValor()) {
+        if (hijo.getValor().equals(this.getRaiz().getValor())) {
             this.raiz = null;
-        }else{
-            if(hijo.getValor().compareTo(padre.getValor()))
+        } else {
+            if (hijo.getValor().compareTo(padre.getValor()) == 1) {
+                padre.setHijoDerecho(null);
+            } else if (hijo.getValor().compareTo(padre.getValor()) == -1) {
+                padre.setHijoIzquierdo(null);
+            }
         }
 
-
-
-    /*
-        while (!cola.isEmpty()) {
-            if (nodo.getHijoIzquierdo() != null) {
-                cola.enqueue(nodo.getHijoIzquierdo());
-            }
-            if (nodo.getHijoDerecho() != null) {
-                cola.enqueue(nodo.getHijoDerecho());
-            }
-            this.remove(nodo.getValor());
-            cola.dequeue();
-
-        }*/
     }
 
     /**
@@ -99,6 +88,39 @@ public class ArbolABBExt<T extends Comparable<? super T>> extends ArbolABB<T> im
      */
     @Override
     public NodoABB<T> menorAntecesorComun(NodoABB<T> x, NodoABB<T> y) {
-        return null;
+        ListaEnlazadaNoOrdenada<NodoABB<T>> listaX = new ListaEnlazadaNoOrdenada<>();
+        ListaEnlazadaNoOrdenada<NodoABB<T>> listaY = new ListaEnlazadaNoOrdenada<>();
+
+        NodoABB<T> aux = this.getRaiz();
+        while (!aux.getValor().equals(x.getValor())) {
+            listaX.addToRear(aux);
+            if (aux.getValor().compareTo(x.getValor()) > 0) {
+                aux = aux.getHijoIzquierdo();
+            } else if (aux.getValor().compareTo(x.getValor()) < 0) {
+                aux = aux.getHijoDerecho();
+            }
+        }
+        aux = this.getRaiz();
+
+        while (!aux.getValor().equals(y.getValor())) {
+            listaY.addToRear(aux);
+            if (aux.getValor().compareTo(y.getValor()) > 0) {
+                aux = aux.getHijoIzquierdo();
+            } else if (aux.getValor().compareTo(y.getValor()) < 0) {
+                aux = aux.getHijoDerecho();
+            }
+        }
+        aux = null;
+        for (int i = 0; i < listaX.size(); i++) {
+
+            for (int j = 0; j < listaY.size(); j++) {
+
+                if (listaX.get(i).equals(listaY.get(j))) {
+                    aux = listaX.get(i);
+                }
+            }
+        }
+        return aux;
     }
+
 }
