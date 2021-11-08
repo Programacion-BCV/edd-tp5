@@ -31,40 +31,69 @@ public class TablaHash<K, T> implements TablaHashInterfaz<K, T> {
 
     @Override
     public void remove(K clave) {
+        for (int i = 0; i < tabla.length; i++) {
+            if (this.tabla[i] != null) {
 
+                if (this.tabla[i].getClave().equals(clave)) {
+                    this.tabla[i] = null;
+                    this.contador--;
+                    break;
+                }
+            }
+        }
     }
 
     @Override
     public T get(K clave) {
-        return null;
+        T valor = null;
+        for (int i = 0; i < tabla.length; i++) {
+            if (this.tabla[i] != null) {
+
+                if (this.tabla[i].getClave().equals(clave)) {
+                    valor = (T) this.tabla[i].getValor();
+                }
+            }
+        }
+        return valor;
     }
 
     @Override
     public boolean contains(K clave) {
-        return false;
+        boolean resultado = false;
+        for (int i = 0; i < tabla.length; i++) {
+            if (this.tabla[i] != null) {
+
+                if (this.tabla[i].getClave().equals(clave)) {
+                    resultado= true;
+                    break;
+                }
+            }
+        }
+        return resultado;
     }
 
     @Override
     public void makeEmpty() {
-
+        for (int i = 0; i < tabla.length; i++) {
+            if (this.tabla[i] != null) {
+                this.tabla[i] = null;
+                this.contador--;
+            }
+        }
     }
 
     @Override
     public int size() {
-        return contador;
+        return tabla.length;
     }
 
     @Override
     public boolean isFull() {
-        return false;
+        return this.tabla.length == this.contador;
     }
 
     private int funcionHash(K clave) {
         return clave.hashCode() % tabla.length;
-    }
-
-    public void mostrar() {
-
     }
 
     private int colisionLineal(int i) {
@@ -94,7 +123,14 @@ public class TablaHash<K, T> implements TablaHashInterfaz<K, T> {
         String resultado = "";
         for (int i = 0; i < this.tabla.length; i++) {
             NodoListaHash<K, T> lista = this.tabla[i];
-            resultado += "(" + lista.getClave() + "," + lista.getValor() + ")";
+            resultado += i + ": ";
+            if (this.tabla[i] != null) {
+                resultado +=
+                        "[" + lista.getClave() + "," + lista.getValor() + "]" +
+                        "\n";
+            } else {
+                resultado += "\n";
+            }
         }
         return resultado;
     }
